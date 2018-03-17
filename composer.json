@@ -1,0 +1,55 @@
+{
+    "name": "ekstazi/reamp",
+    "type": "library",
+    "description": "PHP WebSocket library",
+    "keywords": [
+        "WebSockets",
+        "Server",
+        "Ratchet",
+        "ReAmp",
+        "Amphp",
+        "Sockets",
+        "WebSocket"
+    ],
+    "homepage": "http://socketo.me",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Boden",
+            "email": "cboden@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Maxim Furtuna",
+            "email": "ekstazyst@gmail.com",
+            "role": "Make port to amp"
+        }
+    ],
+    "support": {
+        "forum": "https://groups.google.com/forum/#!forum/ratchet-php",
+        "issues": "https://github.com/ratchetphp/Ratchet/issues",
+        "irc": "irc://irc.freenode.org/reactphp"
+    },
+    "autoload": {
+        "psr-4": {
+            "Reamp\\Server\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "amphp/socket": "^0.10.5"
+    },
+    "scripts": {
+        "style": "./vendor/bin/php-cs-fixer fix",
+        "test": "./vendor/bin/phpunit --colors"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "friendsofphp/php-cs-fixer": "^2.3"
+    }
+}
