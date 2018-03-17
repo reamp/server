@@ -2,24 +2,22 @@
 
 namespace Reamp\Server;
 
-use Reamp\ConnectionInterface;
-use Reamp\MessageComponentInterface;
 
-class IpBlackList implements MessageComponentInterface {
+class IpBlackList implements IoServerInterface {
     /**
      * @var array
      */
     protected $_blacklist = [];
 
     /**
-     * @var \Reamp\MessageComponentInterface
+     * @var IoServerInterface
      */
     protected $_decorating;
 
     /**
      * @param \Reamp\MessageComponentInterface $component
      */
-    public function __construct(MessageComponentInterface $component) {
+    public function __construct(IoServerInterface $component) {
         $this->_decorating = $component;
     }
 

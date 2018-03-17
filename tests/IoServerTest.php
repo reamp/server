@@ -7,8 +7,8 @@ use Amp\Socket\Server;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\Exception;
 use PHPUnit\Framework\TestCase;
-use Reamp\ConnectionInterface;
-use Reamp\MessageComponentInterface;
+use Reamp\Server\ConnectionInterface;
+use Reamp\Server\IoServerInterface;
 use Reamp\Server\IoServer;
 
 /**
@@ -22,7 +22,7 @@ class IoServerTest extends TestCase {
     protected $server;
 
     /**
-     * @var MockObject|MessageComponentInterface
+     * @var MockObject|IoServerInterface
      */
     protected $app;
 
@@ -34,7 +34,7 @@ class IoServerTest extends TestCase {
     protected $reactor;
 
     public function setUp() {
-        $this->app = $this->createMock(MessageComponentInterface::class);
+        $this->app = $this->createMock(IoServerInterface::class);
 
         $this->reactor = \Amp\Socket\listen('0.0.0.0:0');
 
@@ -55,8 +55,8 @@ class IoServerTest extends TestCase {
         IoServer::run();
         //$this->server->loop->tick();
 
-        //$this->assertTrue(is_string($this->app->last['onOpen'][0]->remoteAddress));
-        //$this->assertTrue(is_int($this->app->last['onOpen'][0]->resourceId));
+        //self::assertTrue(is_string($this->app->last['onOpen'][0]->remoteAddress));
+        //self::assertTrue(is_int($this->app->last['onOpen'][0]->resourceId));
     }
 
     public function testOnData() {
@@ -109,7 +109,7 @@ class IoServerTest extends TestCase {
     }
 
     public function testFactory() {
-        $this->assertInstanceOf(IoServer::class, IoServer::factory($this->app, 0));
+        self::assertInstanceOf(IoServer::class, IoServer::factory($this->app, 0));
     }
 
     public function testOnErrorPassesException() {

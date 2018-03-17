@@ -3,7 +3,7 @@
 namespace tests\Server;
 
 use PHPUnit\Framework\TestCase;
-use Reamp\ConnectionInterface;
+use Reamp\Server\ConnectionInterface;
 use Reamp\Server\EchoServer;
 
 class EchoServerTest extends TestCase {

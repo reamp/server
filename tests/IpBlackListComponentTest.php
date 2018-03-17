@@ -3,8 +3,8 @@
 namespace tests\Server;
 
 use PHPUnit\Framework\TestCase;
-use Reamp\ConnectionInterface;
-use Reamp\MessageComponentInterface;
+use Reamp\Server\ConnectionInterface;
+use Reamp\Server\IoServerInterface;
 use Reamp\Server\IpBlackList;
 
 /**
@@ -15,7 +15,7 @@ class IpBlackListComponentTest extends TestCase {
     protected $mock;
 
     public function setUp() {
-        $this->mock = $this->createMock(MessageComponentInterface::class);
+        $this->mock = $this->createMock(IoServerInterface::class);
         $this->blocker = new IpBlackList($this->mock);
     }
 
@@ -88,7 +88,7 @@ class IpBlackListComponentTest extends TestCase {
             ->unblockAddress($unblock)
             ->blockAddress($blockTwo);
 
-        $this->assertEquals([$blockOne, $blockTwo], $this->blocker->getBlockedAddresses());
+        self::assertEquals([$blockOne, $blockTwo], $this->blocker->getBlockedAddresses());
     }
 
     public function testDecoratorPassesErrors() {
@@ -110,11 +110,11 @@ class IpBlackListComponentTest extends TestCase {
      * @dataProvider addressProvider
      */
     public function testFilterAddress($expected, $input) {
-        $this->assertEquals($expected, $this->blocker->filterAddress($input));
+        self::assertEquals($expected, $this->blocker->filterAddress($input));
     }
 
     public function testUnblockingSilentlyFails() {
-        $this->assertInstanceOf(IpBlackList::class, $this->blocker->unblockAddress('localhost'));
+        self::assertInstanceOf(IpBlackList::class, $this->blocker->unblockAddress('localhost'));
     }
 
     protected function newConn() {

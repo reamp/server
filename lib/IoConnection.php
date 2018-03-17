@@ -4,7 +4,6 @@ namespace Reamp\Server;
 
 use Amp\Promise;
 use Amp\Socket\ServerSocket as AmpConn;
-use Reamp\ConnectionInterface;
 
 /**
  * {@inheritdoc}

@@ -17,7 +17,7 @@ use Reamp\MessageComponentInterface;
 class IoServer {
 
     /**
-     * @var \Reamp\MessageComponentInterface
+     * @var IoServerInterface
      */
     public $app;
 
@@ -31,7 +31,7 @@ class IoServer {
      * @param \Reamp\MessageComponentInterface $app The ReAmp/Ratchet application stack to host
      * @param ServerInterface $socket The amp socket server to run the ReAmp/Ratchet application off of
      */
-    public function __construct(MessageComponentInterface $app, ServerInterface $socket) {
+    public function __construct(IoServerInterface $app, ServerInterface $socket) {
         if (false === \strpos(PHP_VERSION, "hiphop")) {
             \gc_enable();
         }
@@ -55,7 +55,7 @@ class IoServer {
      * @param  string $address The address to receive sockets on (0.0.0.0 means receive connections from any)
      * @return IoServer
      */
-    public static function factory(MessageComponentInterface $component, $port = 80, $address = '0.0.0.0') {
+    public static function factory(IoServerInterface $component, $port = 80, $address = '0.0.0.0') {
         $socket = \Amp\Socket\listen($address . ':' . $port);
 
         return new static($component, $socket);

@@ -3,7 +3,7 @@
 namespace tests\Server;
 
 use PHPUnit\Framework\TestCase;
-use Reamp\ConnectionInterface;
+use Reamp\Server\ConnectionInterface;
 use Reamp\Server\FlashPolicy;
 
 /**
@@ -21,7 +21,7 @@ class FlashPolicyComponentTest extends TestCase {
         $this->_policy->addAllowedAccess('example.com', '*');
         $this->_policy->addAllowedAccess('dev.example.com', '*');
 
-        $this->assertInstanceOf('SimpleXMLElement', $this->_policy->renderPolicy());
+        self::assertInstanceOf('SimpleXMLElement', $this->_policy->renderPolicy());
     }
 
     public function testInvalidPolicyReader() {
@@ -40,7 +40,7 @@ class FlashPolicyComponentTest extends TestCase {
      * @dataProvider siteControl
      */
     public function testSiteControlValidation($accept, $permittedCrossDomainPolicies) {
-        $this->assertEquals($accept, $this->_policy->validateSiteControl($permittedCrossDomainPolicies));
+        self::assertEquals($accept, $this->_policy->validateSiteControl($permittedCrossDomainPolicies));
     }
 
     public static function siteControl() {
@@ -53,7 +53,7 @@ class FlashPolicyComponentTest extends TestCase {
      * @dataProvider URI
      */
     public function testDomainValidation($accept, $domain) {
-        $this->assertEquals($accept, $this->_policy->validateDomain($domain));
+        self::assertEquals($accept, $this->_policy->validateDomain($domain));
     }
 
     public static function URI() {
@@ -66,7 +66,7 @@ class FlashPolicyComponentTest extends TestCase {
      * @dataProvider ports
      */
     public function testPortValidation($accept, $ports) {
-        $this->assertEquals($accept, $this->_policy->validatePorts($ports));
+        self::assertEquals($accept, $this->_policy->validatePorts($ports));
     }
 
     public static function ports() {
@@ -104,13 +104,13 @@ class FlashPolicyComponentTest extends TestCase {
     }
 
     public function testOnOpenExists() {
-        $this->assertTrue(\method_exists($this->_policy, 'onOpen'));
+        self::assertTrue(\method_exists($this->_policy, 'onOpen'));
         $conn = $this->createMock(ConnectionInterface::class);
         $this->_policy->onOpen($conn);
     }
 
     public function testOnCloseExists() {
-        $this->assertTrue(\method_exists($this->_policy, 'onClose'));
+        self::assertTrue(\method_exists($this->_policy, 'onClose'));
         $conn = $this->createMock(ConnectionInterface::class);
         $this->_policy->onClose($conn);
     }

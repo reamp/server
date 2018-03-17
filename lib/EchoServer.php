@@ -3,13 +3,11 @@
 namespace Reamp\Server;
 
 use Amp\Promise;
-use Reamp\ConnectionInterface;
-use Reamp\MessageComponentInterface;
 
 /**
  * A simple ReAmp/Ratchet application that will reply to all messages with the message it received.
  */
-class EchoServer implements MessageComponentInterface {
+class EchoServer implements IoServerInterface {
     public function onOpen(ConnectionInterface $conn) {
     }
 

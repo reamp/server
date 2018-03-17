@@ -3,8 +3,6 @@
 namespace Reamp\Server;
 
 use Amp\Promise;
-use Reamp\ConnectionInterface;
-use Reamp\MessageComponentInterface;
 
 /**
  * An app to go on a server stack to pass a policy file to a Flash socket
@@ -16,7 +14,7 @@ use Reamp\MessageComponentInterface;
  * @link http://learn.adobe.com/wiki/download/attachments/64389123/CrossDomain_PolicyFile_Specification.pdf?version=1
  * @link view-source:http://www.adobe.com/xml/schemas/PolicyFileSocket.xsd
  */
-class FlashPolicy implements MessageComponentInterface {
+class FlashPolicy implements IoServerInterface {
 
     /**
      * Contains the root policy node.
