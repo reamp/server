@@ -2,7 +2,6 @@
 
 namespace Reamp\Server;
 
-
 class IpBlackList implements IoServerInterface {
     /**
      * @var array

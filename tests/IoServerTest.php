@@ -8,8 +8,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\Exception;
 use PHPUnit\Framework\TestCase;
 use Reamp\Server\ConnectionInterface;
-use Reamp\Server\IoServerInterface;
 use Reamp\Server\IoServer;
+use Reamp\Server\IoServerInterface;
 
 /**
  * @covers \Reamp\Server\IoServer

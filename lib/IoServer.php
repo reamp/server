@@ -8,7 +8,6 @@ use Amp\Promise;
 use Amp\Socket\Server as ServerInterface;
 use Amp\Socket\ServerSocket as Connection;
 use Reamp\ConnectionInterface;
-use Reamp\MessageComponentInterface;
 
 /**
  * Creates an open-ended socket to listen on a port for incoming connections.
