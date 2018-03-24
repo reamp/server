@@ -3,27 +3,36 @@
 namespace Reamp\Server;
 
 use Amp\Promise;
-use Amp\Socket\ServerSocket as AmpConn;
+use Amp\Socket\ServerSocket;
 
 /**
- * {@inheritdoc}
+ * @inheritdoc
  */
 class IoConnection implements ConnectionInterface {
     /**
-     * @var AmpConn
+     * @var ServerSocket
      */
-    protected $conn;
+    private $conn;
 
+	/**
+	 * @var int connection id
+	 */
     private $id;
 
+	/**
+	 * @var string Remote address
+	 */
     private $remoteAddress;
 
+	/**
+	 * @var string Local address
+	 */
     private $localAddress;
 
     /**
-     * @param AmpConn $conn
+     * @param ServerSocket $conn
      */
-    public function __construct(AmpConn $conn) {
+    public function __construct(ServerSocket $conn) {
         $this->conn = $conn;
         $this->id = (int) $this->conn->getResource();
         $this->remoteAddress = $this->conn->getRemoteAddress();
@@ -31,27 +40,36 @@ class IoConnection implements ConnectionInterface {
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function send($data): Promise {
         return $this->conn->write($data);
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function close($data = null): Promise {
         return $this->conn->end($data ?? '');
     }
 
+	/**
+	 * @inheritdoc
+	 */
     public function id() {
         return (int) $this->id;
     }
 
+	/**
+	 * @inheritdoc
+	 */
     public function getRemoteAddress() {
         return $this->remoteAddress;
     }
 
+	/**
+	 * @inheritdoc
+	 */
     public function getLocalAddress() {
         return $this->localAddress;
     }

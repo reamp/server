@@ -2,6 +2,15 @@
 
 namespace Reamp\Server;
 
+/**
+ *
+ * Purpose of this Component
+ * Is someone doing something malicious to your server? Keep them out!
+ *
+ * The IpBlackList component let's you configured IP addresses to block. It should be placed as close
+ * to the IoServer as possible as it will kick bad connections immediately.
+ * Example: {@see ./examples/blocked.php}
+ */
 class IpBlackList implements IoServerInterface {
     /**
      * @var array
@@ -14,7 +23,7 @@ class IpBlackList implements IoServerInterface {
     protected $_decorating;
 
     /**
-     * @param \Reamp\MessageComponentInterface $component
+     * @param IoServerInterface $component
      */
     public function __construct(IoServerInterface $component) {
         $this->_decorating = $component;

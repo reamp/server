@@ -5,13 +5,20 @@ namespace Reamp\Server;
 use Amp\Coroutine;
 use Amp\Loop;
 use Amp\Promise;
-use Amp\Socket\Server as ServerInterface;
-use Amp\Socket\ServerSocket as Connection;
-use Reamp\ConnectionInterface;
+use Amp\Socket\Server;
+use Amp\Socket\ServerSocket;
+use Amp\Socket\SocketException;
 
 /**
+ * The IoServer should be the base of your application. This is the core of the events driven from client actions.
+ * It handles receiving new connections, reading/writing to those connections, closing the connections,
+ * and handles all errors from your application.
+ * 
  * Creates an open-ended socket to listen on a port for incoming connections.
  * Events are delegated through this to attached applications.
+ *
+ * Example: {@see EchoServer}
+ * @see IoServerInterface
  */
 class IoServer {
 
@@ -22,15 +29,15 @@ class IoServer {
 
     /**
      * The socket server the ReAmp Application is run off of.
-     * @var ServerInterface
+     * @var Server
      */
     public $socket;
 
     /**
-     * @param \Reamp\MessageComponentInterface $app The ReAmp/Ratchet application stack to host
-     * @param ServerInterface $socket The amp socket server to run the ReAmp/Ratchet application off of
+     * @param IoServerInterface $app The ReAmp application stack to host
+     * @param Server $socket The amp socket server to run the ReAmp application
      */
-    public function __construct(IoServerInterface $app, ServerInterface $socket) {
+    public function __construct(IoServerInterface $app, Server $socket) {
         if (false === \strpos(PHP_VERSION, "hiphop")) {
             \gc_enable();
         }
@@ -49,10 +56,13 @@ class IoServer {
     }
 
     /**
-     * @param  \Reamp\MessageComponentInterface $component The application that I/O will call when events are received
+     * @param  IoServerInterface $component The application that I/O will call when events are received
      * @param  int $port The port to server sockets on
      * @param  string $address The address to receive sockets on (0.0.0.0 means receive connections from any)
      * @return IoServer
+	 *
+	 * @throws SocketException If binding to the specified URI failed.
+	 * @throws \Error If an invalid scheme is given.
      */
     public static function factory(IoServerInterface $component, $port = 80, $address = '0.0.0.0') {
         $socket = \Amp\Socket\listen($address . ':' . $port);
@@ -72,7 +82,7 @@ class IoServer {
 
     /**
      * Triggered when a new connection is received from Amp.
-     * @param Connection $conn
+     * @param ServerSocket $conn
      * @return Promise
      */
     public function handleConnect($conn): Promise {
@@ -81,7 +91,7 @@ class IoServer {
 
     /**
      * Triggered when a new connection is received from Amp.
-     * @param Connection $conn
+     * @param ServerSocket $conn
      * @return \Generator
      */
     protected function onConnect($conn): \Generator {
@@ -137,6 +147,12 @@ class IoServer {
         return new Coroutine($this->onError($e, $conn));
     }
 
+	/**
+	 * An error has occurred, let the listening application know.
+	 * @param \Throwable $e
+	 * @param $conn
+	 * @return \Generator
+	 */
     protected function onError(\Throwable $e, $conn) {
         try {
             yield \Amp\call([$this->app, 'onError'], $conn, $e);
