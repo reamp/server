@@ -1,7 +1,7 @@
 {
-    "name": "ekstazi/reamp",
+    "name": "reamp/server",
     "type": "library",
-    "description": "PHP WebSocket library",
+    "description": "Base Reamp server component",
     "keywords": [
         "WebSockets",
         "Server",
