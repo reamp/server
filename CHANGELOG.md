@@ -9,23 +9,24 @@ CHANGELOG
 ---
 * 0.1.1-dev
   * support async in ComponentInterface
-  * ConnectionInterface now async also
+  * BC: ConnectionInterface now async also
   * use ServerRequestInterface insteadof RequestInterface
-  * App no longer support flash policy
-  * Router use ServerRequestInterface::queryParams insteadof Uri::query
+  * BC: App no longer support flash policy
+  * BC: Router use ServerRequestInterface::queryParams insteadof Uri::query
   * cookie support
   * support final data in close
-  * ConnectionInterface doesn not forgot id and address
+  * BF: ConnectionInterface doesn not forgot id and address
   * Continue to work even on fatal errors
   * no need to use event loop as param for IoServer.
   * IoServer::run and App::run now static
   * implement logger component
-  * fix bug with empty origin in OriginCheck
+  * BF: fix bug with empty origin in OriginCheck
+  
 * 0.1 
   * Port ioserver to amphp
   * Update phpunit
   * add code style file
-  * Rename to Reamp
+  * BC: Rename to Reamp
 * 0.4.1 (2017-12-11)
   * Only enableKeepAlive in App if no WsServer passed allowing user to set their own timeout duration
   * Support Symfony 4
