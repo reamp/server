@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # ReAmp
 What is ReAmp ? It is port of [Ratchet](http://socketo.me) to [amphp](https://amphp.org/). It was created as fork of original project but add some new features:
  * Use different namespace
@@ -12,6 +15,10 @@ There still lack of features but will be done in future:
  * psr logging support 
  * better parsing similar to amp/aerys style
  * support async and promises in components 
+
+## Reamp server
+This is base component of reamp. It used for creating socket server
+
 
 ## Installation
 
@@ -29,6 +36,10 @@ Documentation can be found on [Ratchet's website](http://socketo.me): with some 
 
 - PHP 7.0+
 - Shell access is required and root access is recommended.
+
+## Components included
+- [IoServer](/IoServer.md) 
+- [IpBlackList](/IpBlackList.md)
 
 ## Examples
 
@@ -81,5 +92,5 @@ IoServer::run();
 
     $ php chat.php
 
-Further examples can be found in the [`./examples`](./examples) directory of this repository as well as in the [Ratchet](https://github.com/cboden/Ratchet-examples) repository.
+Further examples can be found in the [`./examples`](https://github.com/reamp/server/examples) directory of this repository as well as in the [Ratchet](https://github.com/cboden/Ratchet-examples) repository.
 

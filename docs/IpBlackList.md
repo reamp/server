@@ -1,4 +1,6 @@
-#IpBlackList
+---
+---
+# IpBlackList
 ## Purpose of this Component
 Is someone doing something malicious to your server? Keep them out!
 

@@ -27,7 +27,8 @@ Your app class (for testing, or making a telnet application) implementing `IoSer
 * `FlashPolicy`
 * `EchoServer`
 
-Wrapped by other components nicely
+## Wrapped by other components nicely.
+
 Typically, none. This should be the base of your application as it handles the direct communication and transport with clients.
 
 Usage

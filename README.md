@@ -13,6 +13,9 @@ There still lack of features but will be done in future:
  * better parsing similar to amp/aerys style
  * support async and promises in components 
 
+## Reamp server
+This is base component of reamp. It used for creating socket server
+
 ## Installation
 
 This package can be installed as a [Composer](https://getcomposer.org/) dependency.
